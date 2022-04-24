@@ -1,1 +1,1 @@
-String API_KEY = 'a';
+String API_KEY = '';
