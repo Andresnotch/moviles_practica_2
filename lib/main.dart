@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'FindTrackApp',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
+        cardColor: Color.fromARGB(255, 51, 51, 51),
+        scaffoldBackgroundColor: Colors.black,
         inputDecorationTheme: const InputDecorationTheme(
             iconColor: _mainColor, fillColor: _mainColor),
         textSelectionTheme: const TextSelectionThemeData(

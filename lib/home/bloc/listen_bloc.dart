@@ -13,5 +13,8 @@ class ListenBloc extends Bloc<ListenEvent, ListenState> {
 
   FutureOr<void> listenNow(event, emit) async {
     emit(ListeningState());
+    await Future.delayed(Duration(seconds: 5), () {});
+
+    emit(ListenInitial());
   }
 }

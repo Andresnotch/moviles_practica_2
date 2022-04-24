@@ -37,15 +37,43 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(0),
-              child: BlocBuilder<ListenBloc, ListenState>(
-                builder: (context, state) {
-                  if (state is ListeningState) {
-                    return AvatarGlow(
-                      endRadius: 150.0,
-                      showTwoGlows: true,
-                      child: ElevatedButton(
-                        onPressed: () {},
+                padding: EdgeInsets.all(0),
+                child: BlocConsumer<ListenBloc, ListenState>(
+                  listener: (context, state) {
+                    if (state is ListeningState) {
+                      _mainHint = 'Listening...';
+                    } else {
+                      _mainHint = 'Toque para escuchar';
+                    }
+                    setState(() {});
+                  },
+                  builder: (context, state) {
+                    if (state is ListeningState) {
+                      return AvatarGlow(
+                        endRadius: 150.0,
+                        showTwoGlows: true,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Image.asset(
+                            'assets/icon/icon_line.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              CircleBorder(),
+                            ),
+                            fixedSize:
+                                MaterialStateProperty.all(Size.fromRadius(100)),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<ListenBloc>().add(ListenNowEvent());
+                          setState(() {});
+                        },
                         child: Image.asset(
                           'assets/icon/icon_line.png',
                           width: 100,
@@ -58,31 +86,10 @@ class _HomePageState extends State<HomePage> {
                           fixedSize:
                               MaterialStateProperty.all(Size.fromRadius(100)),
                         ),
-                      ),
-                    );
-                  } else {
-                    return ElevatedButton(
-                      onPressed: () {
-                        context.read<ListenBloc>().add(ListenNowEvent());
-                        setState(() {});
-                      },
-                      child: Image.asset(
-                        'assets/icon/icon_line.png',
-                        width: 100,
-                        height: 100,
-                      ),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          CircleBorder(),
-                        ),
-                        fixedSize:
-                            MaterialStateProperty.all(Size.fromRadius(100)),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ),
+                      );
+                    }
+                  },
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
