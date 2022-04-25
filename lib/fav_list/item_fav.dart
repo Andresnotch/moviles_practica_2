@@ -18,51 +18,44 @@ class _ItemFavState extends State<ItemFav> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(16.0),
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Image.network(
-                  "${widget.favData["picture"]}",
-                  fit: BoxFit.cover,
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.network(
+                "${widget.favData["picture"]}",
+                fit: BoxFit.cover,
+              ),
+            ),
+            ListTile(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.favorite,
+                  color: _switchValue ? Colors.red : Colors.grey,
+                ),
+                onPressed: () {
+                  _switchValue = !_switchValue;
+                  setState(() {});
+                },
+              ),
+              title: Text(
+                "${widget.favData["title"]}",
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
-              ListTile(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.favorite,
-                    color: _switchValue ? Colors.red : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _switchValue = !_switchValue;
-                    setState(() {});
-                  },
-                ),
-                title: Text(
-                  "${widget.favData["title"]}",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                subtitle: Text(
-                  "${widget.favData["author"]}",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () async {},
+              subtitle: Text(
+                "${widget.favData["author"]}",
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
